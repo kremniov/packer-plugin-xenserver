@@ -76,7 +76,7 @@ func (c *CommonConfig) Prepare(ctx *interpolate.Context, pc *common.PackerConfig
 	}
 
 	if c.ToolsIsoName == "" {
-		c.ToolsIsoName = "xs-tools.iso"
+		c.ToolsIsoName = "guest-tools.iso"
 	}
 
 	if c.HTTPPortMin == 0 {
