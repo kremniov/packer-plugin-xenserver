@@ -286,10 +286,10 @@ func (self *Builder) Run(ctx context.Context, ui packer.Ui, hook packer.Hook) (p
 		new(commonsteps.StepProvision),
 		new(xscommon.StepShutdown),
 		new(xscommon.StepSetVmToTemplate),
-		&xscommon.StepDetachVdi{
+		&xscommon.StepEjectVdi{
 			VdiUuidKey: "iso_vdi_uuid",
 		},
-		&xscommon.StepDetachVdi{
+		&xscommon.StepEjectVdi{
 			VdiUuidKey: "isoname_vdi_uuid",
 		},
 		&xscommon.StepDetachVdi{

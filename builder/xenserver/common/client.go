@@ -593,6 +593,33 @@ func DisconnectVdi(c *Connection, vmRef xenapi.VMRef, vdi xenapi.VDIRef) error {
 	return fmt.Errorf("Could not find VBD for VDI '%s'", vdi)
 }
 
+func EjectVdi(c *Connection, vmRef xenapi.VMRef, vdi xenapi.VDIRef) error {
+	vbds, err := c.client.VM.GetVBDs(c.session, vmRef)
+	if err != nil {
+		return fmt.Errorf("Unable to get VM VBDs: %s", err.Error())
+	}
+
+	for _, vbd := range vbds {
+		rec, err := c.client.VBD.GetRecord(c.session, vbd)
+		if err != nil {
+			return fmt.Errorf("Could not get record for VBD '%s': %s", vbd, err.Error())
+		}
+		recVdi := rec.VDI
+		if recVdi == vdi {
+			err = c.client.VBD.Eject(c.session, vbd)
+			if err != nil {
+				return fmt.Errorf("Could not eject VBD '%s': %s", vbd, err.Error())
+			}
+
+			return nil
+		} else {
+			log.Printf("Could not find VDI record in VBD '%s'", vbd)
+		}
+	}
+
+	return fmt.Errorf("Could not find VBD for VDI '%s'", vdi)
+}
+
 func (self *VM) SetPlatform(params map[string]string) (err error) {
 	result := APIResult{}
 	platform_rec := make(xmlrpc.Struct)
