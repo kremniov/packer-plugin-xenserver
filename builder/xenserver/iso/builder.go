@@ -127,8 +127,6 @@ func (self *Builder) Prepare(raws ...interface{}) (params []string, warns []stri
 				if self.config.ISOChecksum == "" {
 					errs = packer.MultiErrorAppend(
 						errs, errors.New("Due to the file size being large, an iso_checksum is required."))
-				} else {
-					self.config.ISOChecksum = strings.ToLower(self.config.ISOChecksum)
 				}
 			}
 		}
