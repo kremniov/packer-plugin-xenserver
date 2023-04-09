@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"path"
-	"strings"
 	"time"
 
 	"github.com/hashicorp/hcl/v2/hcldec"
