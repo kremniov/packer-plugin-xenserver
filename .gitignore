@@ -9,3 +9,4 @@ dist/*
 vendor/*
 packer-plugin-xenserver
 .idea
+.stuff
