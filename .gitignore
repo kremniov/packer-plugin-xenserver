@@ -10,3 +10,5 @@ vendor/*
 packer-plugin-xenserver
 .idea
 .stuff
+*.log
+init*.sh
